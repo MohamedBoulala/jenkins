@@ -4,7 +4,7 @@ pipeline {
     agent any
     // Déclarer les variables d'environnement globales
     environment {
-        DOCKER_USERNAME = "ditdevops1" // username docker
+        DOCKER_USERNAME = "mayboulala"      // username docker
         IMAGE_VERSION = "1.${BUILD_NUMBER}"  // version dynamique de l’image
         DOCKER_IMAGE = "${DOCKER_USERNAME}/tp-app:${IMAGE_VERSION}" // nom de l’image docker
         DOCKER_CONTAINER = "ci-cd-html-css-app"  // nom du conteneur
@@ -14,7 +14,7 @@ pipeline {
         // Étape 1 : Récupération du code source depuis GitHub
         stage("Checkout") {
             steps {
-                git branch: 'master', url: 'https://github.com/ditdevops1/tp5-ci-cd.git'
+                git branch: 'master', url: 'https://github.com/MohamedBoulala/jenkins.git'
             }
         }
         // Étape 2 : Exécution des tests
@@ -35,7 +35,7 @@ pipeline {
         stage("Push image to Docker Hub") {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'credential-tp5-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]){
+                    withCredentials([usernamePassword(credentialsId: '96d724af-1115-4812-b0e2-b218c3a5b86e', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]){
                     bat """
                     docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
                     echo 'Docker login successful'
